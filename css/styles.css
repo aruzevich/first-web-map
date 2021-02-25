@@ -1,6 +1,7 @@
+
+
 #mapContainer {
-  width: 330px;
+  width: 75%;
   height: 400px;
-  background-color: steelblue;
   margin: 0 auto;
 }
