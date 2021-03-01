@@ -15,49 +15,56 @@ var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
 
-// add marker to the map
-var marker = new mapboxgl.Marker({
-  color: 'red'
-})
-  .setLngLat([-73.96969, 40.77807])
-  .setPopup(new mapboxgl.Popup().setHTML("<h3>Central Park - The Ramble</h3>")) // add popup
-  .addTo(map);
-
-
 // set up dummy data
-var dummyData = [
+var parks = [
   {
-    name: 'Van Cortland Park - John Kieran Trail',
-    borough: 'Bronx',
+    name: 'Central Park',
+    location: 'Where: The Ramble',
+    borough: 'Borough: Manhattan',
+    point: [-73.96969, 40.77807],
+    color: '#5B5EA6'
+  },
+  {
+    name: 'Van Cortland Park',
+    location: 'Where: John Kieran Trail',
+    borough: 'Borough: The Bronx',
     point: [-73.89137, 40.89155],
-    color: 'slateblue'
+    color: '#B565A7'
   },
   {
-    name: 'Prospect Park - The Ravine',
-    borough: 'Brooklyn',
+    name: 'Prospect Park',
+    location: 'Where: The Ravine',
+    borough: 'Borough: Brooklyn',
     point: [-73.96883, 40.66412],
-    color: 'coral'
+    color: '#DD4124'
   },
   {
-    name: 'Highland Park - Ridgewood Reservoir',
-    borough: 'Queens',
+    name: 'Highland Park',
+    location: 'Where: Ridgewood Reservoir',
+    borough: 'Borough: Queens',
     point: [-73.88736, 40.68628],
-    color: 'indigo'
+    color: '#009B77'
   },
   {
-    name: 'Clove Lakes Park - Martling Lake',
-    borough: 'Staten Island',
+    name: 'Clove Lakes Park',
+    location: 'Where: Martling Lake',
+    borough: 'Borough: Staten Island',
     point: [-74.11644, 40.62328],
-    color: 'darkgreen'
+    color: '#EFC050'
   }
 ]
 
-dummyData.forEach(function(data) {
-  new mapboxgl.Marker()
-    .setLngLat(data.point)
-    .setPopup(new mapboxgl.Popup().setHTML(`
-      <h3>${data.name}</h3>
-      <p>${data.borough}</p>
-    `)) // add popup
+parks.forEach(function(park) {
+  var html = `
+    <h2>${park.name}</h2>
+    <div><b>${park.location}</b></div>
+    <div>${park.borough}</div>
+  `
+
+  new mapboxgl.Marker({
+    color: park.color
+  })
+    .setLngLat(park.point)
+    .setPopup(new mapboxgl.Popup().setHTML(html)) // add popup
     .addTo(map);
-})
+  })
